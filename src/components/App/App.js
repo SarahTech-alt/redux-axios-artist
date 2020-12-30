@@ -6,24 +6,26 @@ import axios from 'axios';
 import ArtistList from './../ArtistList/ArtistList.js';
 
 class App extends Component {
-  // Called when the (App) component is created
+  // TODO - remove this local state and replace with Redux state 
   state = {
     artists: [],
   }
   
-  // DOM is ready
-  componentDidMount() { // react Component method
+  componentDidMount() { 
     this.refreshArtists();
   }
 
+  // Keep this method in App, as it will be used by multiple components
+  // You want to keep the code DRY (Don't Repeat Yourself!)
+  // We'll look at another way to handle this with next week's topic Sagas.
   refreshArtists = () => {
-    // just like $.ajax()
     axios({
       method: 'GET',
       url: '/artist'
     }).then((response) => {
-      console.log(response);
-      // response.data will be the array of artists
+      // response.data is the array of artists
+      console.log(response.data);
+      // TODO - update this to dispatch to Redux
       this.setState({
         artists: response.data,
       });
@@ -36,6 +38,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Famous Artists</h1>
         </header>
+        <p>Welcome to our collection of amazing artists!</p>
         <br/>
         <ArtistList refreshArtists={this.refreshArtists} artistList={this.state.artists} />
       </div>
