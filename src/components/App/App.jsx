@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import ArtistList from './../ArtistList/ArtistList';
+import ArtistList from '../ArtistList/ArtistList';
 
 class App extends Component {
   // TODO - remove this local state and replace with Redux state 
