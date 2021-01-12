@@ -1,49 +1,51 @@
 // App.js
-
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import ArtistList from './../ArtistList/ArtistList.js';
+import ArtistList from '../ArtistList/ArtistList';
 
-class App extends Component {
+function App() {
   // TODO - remove this local state and replace with Redux state 
-  state = {
-    artists: [],
-  }
-  
-  componentDidMount() { 
-    this.refreshArtists();
-  }
+  let [artists, setArtists] = useState([]);
+    
+  // get Artists data from server on load
+  useEffect(() => {
+    console.log('in useEffect');
+    refreshArtists();
+  }, []);
 
   // Keep this method in App, as it will be used by multiple components
   // You want to keep the code DRY (Don't Repeat Yourself!)
   // We'll look at another way to handle this with next week's topic Sagas.
-  refreshArtists = () => {
+  function refreshArtists() {
     axios({
       method: 'GET',
       url: '/artist'
-    }).then((response) => {
+    }).then( response => {
       // response.data is the array of artists
       console.log(response.data);
       // TODO - update this to dispatch to Redux
-      this.setState({
-        artists: response.data,
-      });
+      setArtists(response.data)
+    }).catch( error => {
+      console.log('error on GET', error);
     });
   }
 
-  render() {
+ 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Famous Artists</h1>
         </header>
         <p>Welcome to our collection of amazing artists!</p>
+        
         <br/>
-        <ArtistList refreshArtists={this.refreshArtists} artistList={this.state.artists} />
+
+        <ArtistList refreshArtists={refreshArtists} artistList={artists} />
+        
       </div>
     );
-  }
+ 
 }
 
 export default App;
