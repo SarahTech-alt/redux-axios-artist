@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import ArtistList from '../ArtistList/ArtistList';
 import { useDispatch } from 'react-redux';
+import AddArtist from '../AddArtist/AddArtist';
 
 function App() {
   // TODO - remove this local state and replace with Redux state 
@@ -50,6 +51,7 @@ function App() {
         <br/>
 
         <ArtistList refreshArtists ={ refreshArtists }/>
+        <AddArtist />
         
       </div>
     );
