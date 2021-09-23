@@ -34,7 +34,6 @@ const addNewArtist = event => {
             value = {newArtistName}/>
             <button type="submit">Add Artist</button>
         </form>
-        
         </>
     );
 }
