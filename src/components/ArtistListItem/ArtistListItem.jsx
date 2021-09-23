@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import {useSelector} from 'react-redux'
+
 
 function ArtistListItem(props) {
+
+  const artistList = useSelector(store => store.artistReducer);
 
   const deleteArtist = () => {
     axios({

@@ -11,8 +11,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 const artistReducer = (state = [], action) => {
-    return state;
-}
+    if (action.type === 'SET_ARTIST_LIST'){
+        return action.payload;
+      }
+      // TODO - set artist list with data from server
+      return state;
+    }
 
 // The store is the big JavaScript Object that holds all of the information for our application
 const storeInstance = createStore(

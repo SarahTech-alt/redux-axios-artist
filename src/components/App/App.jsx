@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import ArtistList from '../ArtistList/ArtistList';
+import { useDispatch } from 'react-redux';
 
 function App() {
   // TODO - remove this local state and replace with Redux state 
   let [artists, setArtists] = useState([]);
+
+  const dispatch = useDispatch();
     
   // get Artists data from server on load
   useEffect(() => {
@@ -14,6 +17,8 @@ function App() {
     refreshArtists();
   }, []);
 
+  // Initiate a variable to access dispatch
+  // from react-redux
   // Keep this method in App, as it will be used by multiple components
   // You want to keep the code DRY (Don't Repeat Yourself!)
   // We'll look at another way to handle this with next week's topic Sagas.
@@ -24,7 +29,9 @@ function App() {
     }).then( response => {
       // response.data is the array of artists
       console.log(response.data);
-      // TODO - update this to dispatch to Redux
+      dispatch({
+        type: 'SET_ARTIST_LIST', payload: response.data,
+       })
       setArtists(response.data)
     }).catch( error => {
       console.log('error on GET', error);
@@ -37,11 +44,12 @@ function App() {
         <header className="App-header">
           <h1 className="App-title">Famous Artists</h1>
         </header>
+        <p>{JSON.stringify(artists)}</p>
         <p>Welcome to our collection of amazing artists!</p>
         
         <br/>
 
-        <ArtistList refreshArtists={refreshArtists} artistList={artists} />
+        <ArtistList refreshArtists ={ refreshArtists }/>
         
       </div>
     );
