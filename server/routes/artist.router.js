@@ -14,7 +14,7 @@ router.delete('/:id', (req, res) => {
     res.sendStatus(200);
 });
 
-// GET all the books
+// GET all the artists
 router.post('/', (req, res) => {
     console.log('In artist POST with', req.body);
     const artistToAdd = req.body;
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     res.send(201);
 }); // END GET Route
 
-// GET all the books
+// GET all the artists
 router.get('/', (req, res) => {
     res.send(artists);
 }); // END GET Route

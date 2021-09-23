@@ -51,7 +51,7 @@ function App() {
         <br/>
 
         <ArtistList refreshArtists ={ refreshArtists }/>
-        <AddArtist />
+        <AddArtist refreshArtists={refreshArtists}/>
         
       </div>
     );
